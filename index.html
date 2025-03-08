@@ -1,0 +1,60 @@
+ 
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Configuration ESP32</h2>
+
+    <div>
+        <label>SSID WiFi:</label>
+        <input type="text" id="ssid">
+    </div>
+
+    <div>
+        <label>Mot de passe WiFi:</label>
+        <input type="password" id="password">
+    </div>
+
+    <div>
+        <label>Broker MQTT:</label>
+        <input type="text" id="broker" value="mqtt.eclipseprojects.io">
+    </div>
+
+    <div>
+        <label>Port MQTT:</label>
+        <input type="number" id="port" value="1883">
+    </div>
+
+    <button onclick="connectBLE()">Connexion BLE</button>
+    <button onclick="sendConfig()">Envoyer Configuration</button>
+
+    <script>
+        const SERVICE_UUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
+        const CHARACTERISTIC_UUID = 'beb5483e-36e1-4688-b7f5-ea07361b26a8';
+        let bleCharacteristic;
+
+        async function connectBLE() {
+            const device = await navigator.bluetooth.requestDevice({
+                filters: [{ name: 'ESP32_Config' }],
+                optionalServices: [SERVICE_UUID]
+            });
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService(SERVICE_UUID);
+            bleCharacteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
+            alert('Connecté!');
+        }
+
+        async function sendConfig() {
+            const data = [
+                document.getElementById('ssid').value,
+                document.getElementById('password').value,
+                document.getElementById('broker').value,
+                document.getElementById('port').value
+            ].join('|'); // Séparateur |
+
+            const encoder = new TextEncoder();
+            await bleCharacteristic.writeValue(encoder.encode(data));
+            alert('Configuration envoyée!');
+        }
+    </script>
+</body>
+</html>

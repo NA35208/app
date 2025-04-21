@@ -1,31 +1,95 @@
- 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ESP32 Configuration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #333;
+        }
+
+        div {
+            margin: 15px 0;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin: 15px 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
 <body>
-    <h2>Configuration ESP32</h2>
+    <h2>ESP32 Configuration</h2>
 
     <div>
-        <label>SSID WiFi:</label>
+        <label>WiFi SSID:</label>
         <input type="text" id="ssid">
     </div>
 
     <div>
-        <label>Mot de passe WiFi:</label>
+        <label>WiFi Password:</label>
         <input type="password" id="password">
     </div>
 
     <div>
-        <label>Broker MQTT:</label>
+        <label>MQTT Broker:</label>
         <input type="text" id="broker" value="mqtt.eclipseprojects.io">
     </div>
 
     <div>
-        <label>Port MQTT:</label>
+        <label>MQTT Port:</label>
         <input type="number" id="port" value="1883">
     </div>
 
-    <button onclick="connectBLE()">Connexion BLE</button>
-    <button onclick="sendConfig()">Envoyer Configuration</button>
+    <div class="button-group">
+        <button onclick="connectBLE()">Connect BLE</button>
+        <button onclick="sendConfig()">Send Configuration</button>
+    </div>
 
     <script>
         const SERVICE_UUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
@@ -40,7 +104,7 @@
             const server = await device.gatt.connect();
             const service = await server.getPrimaryService(SERVICE_UUID);
             bleCharacteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
-            alert('Connecté!');
+            alert('Connected!');
         }
 
         async function sendConfig() {
@@ -49,11 +113,11 @@
                 document.getElementById('password').value,
                 document.getElementById('broker').value,
                 document.getElementById('port').value
-            ].join('|'); // Séparateur |
+            ].join('|'); // Separator |
 
             const encoder = new TextEncoder();
             await bleCharacteristic.writeValue(encoder.encode(data));
-            alert('Configuration envoyée!');
+            alert('Configuration sent!');
         }
     </script>
 </body>

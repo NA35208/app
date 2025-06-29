@@ -1,33 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WiFi Configuration</title>
+<style>
+  /* Reset minimal */
+  * {
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+  }
+
+  body {
+    background: #fafafa;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  form {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    width: 100%;
+    max-width: 520px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  td {
+    padding: 12px 10px;
+    vertical-align: middle;
+  }
+
+  tr + tr td {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  hr {
+    border: none;
+    border-top: 1.5px solid #ddd;
+    margin: 10px 0 20px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 1rem;
+    border-radius: 7px;
+    border: 1.8px solid #ccc;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.35);
+  }
+
+  b i {
+    font-size: 1.05rem;
+    color: #555;
+  }
+
+  input[type="submit"] {
+    background-color: #2ecc71;
+    border: none;
+    padding: 13px 28px;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.6);
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #27ae60;
+  }
+
+  .fakebutton {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #e74c3c;
+    color: white;
+    padding: 13px 28px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.6);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+  }
+
+  .fakebutton:hover {
+    background-color: #c0392b;
+  }
+
+  /* Instruction text */
+  table:last-of-type td[colspan="2"] {
+    font-size: 0.9rem;
+    color: #666;
+    padding-top: 15px;
+    line-height: 1.3;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 480px) {
+    form {
+      padding: 20px 15px;
+      max-width: 100%;
+    }
+  }
+</style>
 </head>
 <body>
-<br />
 <form method="POST" action="/savewifi">
-<table>
-<tr style="display: table-row"><td>Own hostname</td></tr>
-<tr style="display: table-row"><td><input type="text" name="myhostname" maxlength="64" value="###MYHOSTNAME###"></td></tr>
-<tr style="display: table-row"><td><hr /></td></tr>
-</table>
-<table>
-###TABLEROWS###
-<tr style="display: table-row"><td colspan=2><hr /></td></tr>
-<tr style="display: table-row"><td colspan=2><b><i>Add new</i></b></td></tr>
-<tr style="display: table-row"><td>SSID</td><td><input type="text" name="ssid" maxlength="32" value=""></td></tr>
-<tr style="display: table-row"><td>PASS</td><td><input type="text" name="pass" maxlength="32" value=""></td></tr>
-</table>
-<br />
-<table>
-<tr><td class="even"><input type="submit" value="save"></td>
-<td class="even"><a class="fakebutton" href="./">cancel</a></td></tr>
-<tr><td colspan=2>To remove a connection,<br />erase the SSID and save
-<input type="hidden" name="counter" value="###COUNTER###">
-</td></tr>
-</table>
+  <table>
+    <tr><td>Own hostname</td></tr>
+    <tr><td><input type="text" name="myhostname" maxlength="64" value="###MYHOSTNAME###" /></td></tr>
+    <tr><td><hr /></td></tr>
+  </table>
+
+  <table>
+    ###TABLEROWS###
+    <tr><td colspan="2"><hr /></td></tr>
+    <tr><td colspan="2"><b><i>Add new</i></b></td></tr>
+    <tr><td>SSID</td><td><input type="text" name="ssid" maxlength="32" value="" /></td></tr>
+    <tr><td>PASS</td><td><input type="text" name="pass" maxlength="32" value="" /></td></tr>
+  </table>
+
+  <br />
+
+  <table>
+    <tr>
+      <td class="even"><input type="submit" value="Save" /></td>
+      <td class="even"><a class="fakebutton" href="./">Cancel</a></td>
+    </tr>
+    <tr>
+      <td colspan="2">To remove a connection,<br />erase the SSID and save
+        <input type="hidden" name="counter" value="###COUNTER###" />
+      </td>
+    </tr>
+  </table>
 </form>
 </body>
 </html>
-

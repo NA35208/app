@@ -1,8 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sensor Configuration</title>
+<style>
+  /* Reset minimal */
+  * {
+    box-sizing: border-box;
+    margin: 0; 
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+  }
+
+  body {
+    background: #f9f9f9;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  form {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #f4f7fa;
+  }
+
+  td {
+    padding: 12px 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+  }
+
+  input[type="text"] {
+    width: 95%;
+    padding: 7px 10px;
+    font-size: 1rem;
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  }
+
+  input[type="submit"] {
+    background-color: #2ecc71;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(46, 204, 113, 0.5);
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #27ae60;
+  }
+
+  .fakebutton {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.5);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    width: 100%;
+  }
+
+  .fakebutton:hover {
+    background-color: #c0392b;
+  }
+
+  /* Style pour la flèche svg dans la table */
+  svg {
+    vertical-align: middle;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+  }
+
+  svg:hover polygon {
+    fill: #0a3c59;
+  }
+
+  /* Texte d’instruction */
+  .instruction {
+    font-size: 0.9rem;
+    color: #555;
+    padding-top: 10px;
+  }
+
+  /* Styles pour la dernière ligne contenant l’info */
+  table:last-of-type td {
+    border: none;
+    padding-top: 15px;
+  }
+</style>
+
 <script type="text/javascript">
 function moveup(n) {
     if (n == 0) return;
@@ -17,31 +138,36 @@ function moveup(n) {
     document.getElementById("sname"+n).value = prevsname;
     document.getElementById("saddr"+(n-1)).value = document.getElementById("saddr"+n).value;
     document.getElementById("saddr"+n).value = prevsaddr;
-
 }
 </script>
+
 </head>
 <body>
-<br />
 <form method="POST" action="/savesens">
-<table id="t"><tbody>
-###TABLEROWS###
-</tbody></table>
-<br />
-<table><tbody>
-<tr><td class="even"><input type="submit" value="save"></td>
-<td class="even"><a class="fakebutton" href="./">cancel</a></td></tr>
-<tr><td colspan=2>To forget a tag, erase<br />the name and save
-<input type="hidden" name="counter" value="###COUNTER###">
-</td></tr>
-</tbody></table>
-</form>
-</body>
-<script type="text/javascript">
-   var arrow = '<svg style="border: 0px solid blue;" width="24" height="32" version="1.1" xmlns="http://www.w3.org/2000/svg">'
-              +'<polygon points="0,24 12,0 24,24 16,24 16,32 8,32 8,24" fill="#0f4c75" stroke="#fff" stroke-opacity="0.3" /></svg>';
-   var t = document.getElementById("t");
-   t.innerHTML = t.innerHTML.replace(/↑/g,arrow);
-</script>
-</html>
+  <table id="t"><tbody>
+    ###TABLEROWS###
+  </tbody></table>
 
+  <table>
+    <tbody>
+      <tr>
+        <td class="even"><input type="submit" value="Save"></td>
+        <td class="even"><a class="fakebutton" href="./">Cancel</a></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="instruction">
+          To forget a tag, erase<br />the name and save
+          <input type="hidden" name="counter" value="###COUNTER###">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<script type="text/javascript">
+   var arrow = '<svg width="24" height="32" version="1.1" xmlns="http://www.w3.org/2000/svg" style="border:0;"><polygon points="0,24 12,0 24,24 16,24 16,32 8,32 8,24" fill="#0f4c75" stroke="#fff" stroke-opacity="0.3" /></svg>';
+   var t = document.getElementById("t");
+   t.innerHTML = t.innerHTML.replace(/↑/g, arrow);
+</script>
+</body>
+</html>

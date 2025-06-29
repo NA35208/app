@@ -1,20 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ESP32 BLE2MQTT</title>
+<style>
+  /* Reset basique */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+  }
+
+  body {
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  header h1 small {
+    font-size: 1.5rem;
+    vertical-align: super;
+    color: #e67e22;
+  }
+
+  .menu {
+    list-style: none;
+    width: 280px;
+  }
+
+  .menu li {
+    margin-bottom: 20px;
+  }
+
+  .fakebutton {
+    display: block;
+    text-decoration: none;
+    background-color: #3498db;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .fakebutton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 6px 12px rgba(41, 128, 185, 0.6);
+  }
+
+  .fakebutton.exit {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 6px rgba(231, 76, 60, 0.4);
+  }
+
+  .fakebutton.exit:hover {
+    background-color: #c0392b;
+    box-shadow: 0 6px 12px rgba(192, 57, 43, 0.6);
+  }
+
+  footer h3 {
+    margin-top: 60px;
+    font-weight: 500;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-<h1>ESP32 BLE<small>2</small>MQTT</h1>
-<br />
-<table>
-<tr><td><a class="fakebutton" href="wifis.html">WiFi config</a><br /><br /></td></tr>
-<tr><td><a class="fakebutton" href="mqtt.html">MQTT config</a><br /><br /></td></tr>
-<tr><td><a class="fakebutton" href="sensors.html">Sensors config</a><br /><br /></td></tr>
-<tr><td><a class="fakebutton" href="boot">Exit &amp; reboot</a></td></tr>
-</table>
-<br />
-<h3>OH2MP 2020-2024</h3>
+  <header>
+    <h1>ESP32 BLE<small>2</small>MQTT</h1>
+  </header>
+  <main>
+    <nav>
+      <ul class="menu">
+        <li><a class="fakebutton" href="wifis.html">WiFi config</a></li>
+        <li><a class="fakebutton" href="mqtt.html">MQTT config</a></li>
+        <li><a class="fakebutton" href="sensors.html">Sensors config</a></li>
+        <li><a class="fakebutton exit" href="boot">Exit &amp; reboot</a></li>
+      </ul>
+    </nav>
+  </main>
+  <footer>
+    <h3>OH2MP 2020-2024</h3>
+  </footer>
 </body>
 </html>
-

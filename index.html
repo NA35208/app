@@ -1,124 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ESP32 Configuration</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        h2 {
-            margin-top: 40px;
-            color: #333;
-        }
-
-        div {
-            margin: 15px 0;
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input {
-            padding: 10px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            margin: 15px 10px;
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h2>ESP32 Configuration</h2>
-
-    <div>
-        <label>WiFi SSID:</label>
-        <input type="text" id="ssid">
-    </div>
-
-    <div>
-        <label>WiFi Password:</label>
-        <input type="password" id="password">
-    </div>
-
-    <div>
-        <label>MQTT Broker:</label>
-        <input type="text" id="broker" value="mqtt.eclipseprojects.io">
-    </div>
-
-    <div>
-        <label>MQTT Port:</label>
-        <input type="number" id="port" value="1883">
-    </div>
-
-    <div class="button-group">
-        <button onclick="connectBLE()">Connect BLE</button>
-        <button onclick="sendConfig()">Send Configuration</button>
-    </div>
-
-    <script>
-        const SERVICE_UUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
-        const CHARACTERISTIC_UUID = 'beb5483e-36e1-4688-b7f5-ea07361b26a8';
-        let bleCharacteristic;
-
-        async function connectBLE() {
-            const device = await navigator.bluetooth.requestDevice({
-                filters: [{ name: 'ESP32_Config' }],
-                optionalServices: [SERVICE_UUID]
-            });
-            const server = await device.gatt.connect();
-            const service = await server.getPrimaryService(SERVICE_UUID);
-            bleCharacteristic = await service.getCharacteristic(CHARACTERISTIC_UUID);
-            alert('Connected!');
-        }
-
-        async function sendConfig() {
-            const data = [
-                document.getElementById('ssid').value,
-                document.getElementById('password').value,
-                document.getElementById('broker').value,
-                document.getElementById('port').value
-            ].join('|'); // Separator |
-
-            const encoder = new TextEncoder();
-            await bleCharacteristic.writeValue(encoder.encode(data));
-            alert('Configuration sent!');
-        }
-    </script>
+<h1>ESP32 BLE<small>2</small>MQTT</h1>
+<br />
+<table>
+<tr><td><a class="fakebutton" href="wifis.html">WiFi config</a><br /><br /></td></tr>
+<tr><td><a class="fakebutton" href="mqtt.html">MQTT config</a><br /><br /></td></tr>
+<tr><td><a class="fakebutton" href="sensors.html">Sensors config</a><br /><br /></td></tr>
+<tr><td><a class="fakebutton" href="boot">Exit &amp; reboot</a></td></tr>
+</table>
+<br />
+<h3>OH2MP 2020-2024</h3>
 </body>
 </html>
+

@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style type="text/css">
-html, body {
-   background: black;
-   color: black;
-   padding: 0;
-   margin: 0;
-   height: 100%;
-}
-.cont {
-   height: 100%;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-.anim {
-   color: white; 
-   font-size: 256px;
-   height: 256px;
-   width: 256px;
-   line-height: 208px;
-   text-align: center;
-   justify-content: center;
-   vertical-align: middle;
-   animation-duration: 2.5s;
-   animation-name: roll;
-}
-@keyframes roll {
-   from { transform: rotate(1500deg) scale(0.2); color: black; }
-   to   { transform: rotate(0deg) scale(1); color: white; }
-}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Animated Checkmark</title>
+<style>
+  /* Reset minimal */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000; /* fond noir */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .anim {
+    color: #fff; /* blanc */
+    font-size: 15vw; /* responsive taille */
+    line-height: 1;
+    text-align: center;
+    animation: roll 2.5s ease forwards;
+    user-select: none;
+  }
+
+  @keyframes roll {
+    0% {
+      transform: rotate(1500deg) scale(0.2);
+      color: #000;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      color: #fff;
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      color: #fff;
+      opacity: 1;
+    }
+  }
 </style>
 </head>
 <body>
-<div class="cont">
-<div class="anim">&#x2714;</div>
-</div>
+  <div class="anim">&#x2714;</div>
 </body>
 </html>
